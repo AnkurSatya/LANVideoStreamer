@@ -1,0 +1,9 @@
+# Build folders
+/build/
+/build/*
+
+# Conan python virtual environment
+/venv_video_streamer/
+
+# video files
+*.mp4

@@ -1,0 +1,23 @@
+[requires]
+opencv/4.11.0
+qt/6.7.3
+
+[options]
+qt/*:gui=True
+qt/*:widgets=True
+qt/*:opengl=desktop
+qt/*:shared=True  # Important to get plugins like 'libqcocoa.dylib'
+qt/*:with_qttools=False
+qt/*:with_qtgui=True
+qt/*:with_qtmultimedia=False  # Not needed if OpenCV handles video
+
+opencv/*:shared=True
+opencv/*:with_ffmpeg=True
+opencv/*:with_png=True
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout

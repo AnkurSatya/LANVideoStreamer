@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build and Run (macOS)",
+      "type": "shell",
+      "command": "cmake --build ./build/Release --config Release && ./build/Release/src/video_stream",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Builds the project and runs the video_stream executable"
+    }
+  ]
+}
