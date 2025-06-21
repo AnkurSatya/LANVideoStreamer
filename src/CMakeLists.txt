@@ -6,7 +6,8 @@ add_executable(
     ${PROJECT_NAME} 
     ${SRC_FILES}
     ${CMAKE_SOURCE_DIR}/include/VideoWidget.h
-    ${CMAKE_SOURCE_DIR}/include/Landing.h
+    ${CMAKE_SOURCE_DIR}/include/LandingPage.h
+    ${CMAKE_SOURCE_DIR}/include/StreamingPage.h
 )
 
 # Include headers

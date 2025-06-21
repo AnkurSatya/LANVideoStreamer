@@ -10,6 +10,8 @@ class VideoWidget : public QWidget{
     Q_OBJECT
     public:
         VideoWidget(QWidget* parent = nullptr);
+        void toggleBlur();
+        void toggleBackgroundBlur();
 
     private slots:
         void updateFrame();
@@ -18,4 +20,8 @@ class VideoWidget : public QWidget{
         cv::VideoCapture cap;
         QLabel* label;
         QTimer* timer;
+
+        // Video Stream modifications
+        bool apply_blur;
+        bool apply_background_blur;
 };

@@ -31,6 +31,10 @@ void VideoWidget::updateFrame(){
     // Flipping the image horizontally
     cv::flip(frame, frame, 1);
 
+    if (apply_blur) {
+        cv::GaussianBlur(frame, frame, cv::Size(21, 21), 0);
+    }
+
     // Setting up color type of the input stream
     cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
 
@@ -51,3 +55,11 @@ void VideoWidget::updateFrame(){
     );
     label->setPixmap(scaledPixmap);
 };
+
+void VideoWidget::toggleBlur(){
+    apply_blur = !apply_blur;
+};
+
+void VideoWidget::toggleBackgroundBlur(){
+    apply_background_blur = !apply_background_blur;
+}
