@@ -8,14 +8,14 @@
 
 class VideoWidget : public QWidget{
     Q_OBJECT
-public:
-    VideoWidget(QWidget* parent = nullptr);
+    public:
+        VideoWidget(QWidget* parent = nullptr);
 
-private slots:
-    void updateFrame();
+    private slots:
+        void updateFrame();
 
-private:
-    cv::VideoCapture cap;
-    QLabel* label;
-    QTimer* timer;
+    private:
+        cv::VideoCapture cap;
+        QLabel* label;
+        QTimer* timer;
 };
