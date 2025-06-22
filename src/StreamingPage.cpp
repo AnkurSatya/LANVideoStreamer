@@ -7,6 +7,7 @@ StreamingPage::StreamingPage(QWidget* parent): QWidget(parent){
     video_widget = new VideoWidget;
 
     // Adding buttons
+    QPushButton* button_toggle_video_stream = new QPushButton("Start/Stop Video");
     QPushButton* button_all_blur = new QPushButton("Blur");
     QPushButton* button_background_blur = new QPushButton("Background Blur");
 
@@ -17,20 +18,14 @@ StreamingPage::StreamingPage(QWidget* parent): QWidget(parent){
     QHBoxLayout* h_layout = new QHBoxLayout;
     h_layout->addWidget(button_all_blur);
     h_layout->addWidget(button_background_blur);
+    h_layout->addWidget(button_toggle_video_stream);
 
     v_layout->addLayout(h_layout);
 
     setLayout(v_layout);
 
     // connect button clicks to signals and slots.
-    connect(button_all_blur, &QPushButton::clicked, this, &StreamingPage::toggleBlur);
-    connect(button_background_blur, &QPushButton::clicked, this, &StreamingPage::toggleBackgroundBlur);
-};
-
-void StreamingPage::toggleBlur(){
-    video_widget->toggleBlur();
-};
-
-void StreamingPage::toggleBackgroundBlur(){
-    video_widget->toggleBackgroundBlur();
+    connect(button_all_blur, &QPushButton::clicked, video_widget, &VideoWidget::toggleBlur);
+    connect(button_background_blur, &QPushButton::clicked, video_widget, &VideoWidget::toggleBackgroundBlur);
+    connect(button_toggle_video_stream, &QPushButton::clicked, video_widget, &VideoWidget::toggleVideoStream);
 };

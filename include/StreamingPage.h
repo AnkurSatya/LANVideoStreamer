@@ -7,10 +7,6 @@ class StreamingPage : public QWidget{
     public:
         StreamingPage(QWidget* parent = nullptr);
 
-    private slots:
-        void toggleBlur();
-        void toggleBackgroundBlur();
-
     private:
-        VideoWidget* video_widget;       
+        VideoWidget* video_widget;
 };

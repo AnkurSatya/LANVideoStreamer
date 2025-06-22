@@ -1,6 +1,6 @@
-#include "VideoWidget.h"
 #include <QVBoxLayout>
 #include <QImage>
+#include "VideoWidget.h"
 
 VideoWidget::VideoWidget(QWidget* parent): QWidget(parent), cap(0){
     if (!cap.isOpened()){
@@ -23,20 +23,26 @@ VideoWidget::VideoWidget(QWidget* parent): QWidget(parent), cap(0){
 };
 void VideoWidget::updateFrame(){
     cv::Mat frame;
-    cap >> frame;
- 
-    if (frame.empty())
-        return ;
 
-    // Flipping the image horizontally
-    cv::flip(frame, frame, 1);
+    if (start_stream){
+        cap >> frame;
 
-    if (apply_blur) {
-        cv::GaussianBlur(frame, frame, cv::Size(21, 21), 0);
+        if (frame.empty())
+            return ;
+
+        // Flipping the image horizontally
+        cv::flip(frame, frame, 1);
+
+        if (apply_blur)
+            cv::GaussianBlur(frame, frame, cv::Size(21, 21), 0);
+
+        // Setting up color type of the input stream
+        cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
     }
-
-    // Setting up color type of the input stream
-    cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
+    else{
+        // Create a single black frame to avoid unnecessary CV processing when the stream is disabled.
+        frame = cv::Mat(label->height(), label->width(), CV_8UC3, cv::Scalar(0, 0, 0));
+    }
 
     // Creating a QT readable image from OpenCV captured image.
     QImage image(
@@ -62,4 +68,8 @@ void VideoWidget::toggleBlur(){
 
 void VideoWidget::toggleBackgroundBlur(){
     apply_background_blur = !apply_background_blur;
-}
+};
+
+void VideoWidget::toggleVideoStream(){
+    start_stream = !start_stream;  
+};
