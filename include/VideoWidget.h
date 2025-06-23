@@ -13,6 +13,7 @@ class VideoWidget : public QWidget{
         void toggleBlur();
         void toggleBackgroundBlur();
         void toggleVideoStream();
+        void applyBackgroundBlur(cv::Mat& frame);
 
     private slots:
         void updateFrame();
@@ -23,7 +24,7 @@ class VideoWidget : public QWidget{
         QTimer* timer;
 
         // Video Stream modifications
-        bool apply_blur;
-        bool apply_background_blur;
-        bool start_stream = true;
+        bool is_apply_blur;
+        bool is_apply_background_blur;
+        bool is_start_stream = true;
 };
