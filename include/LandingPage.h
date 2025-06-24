@@ -6,6 +6,8 @@ class LandingPage : public QWidget{
 
     public:
         LandingPage(QWidget* parent = nullptr);
+        void startStream();
+        void joinStream();
 
     signals:
         void goToStreamingWindow();
