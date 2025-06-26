@@ -1,7 +1,3 @@
-// #include <sys/socket.h>
-// #include <netinet/in.h>
-// #include <arpa/inet.h>
-// #include <unistd.h>
 #include "server.h"
 #include <QDebug>
 
@@ -30,6 +26,7 @@ bool VideoStreamServer::startServer(){
 };
 
 void VideoStreamServer::onNewConnection(){
+    qDebug()<<"New connection request received";
     while (server->hasPendingConnections()){
         QTcpSocket* client_socket = server->nextPendingConnection();
         clients.append(client_socket);

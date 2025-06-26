@@ -3,7 +3,6 @@
 #include "LandingPage.h"
 #include "server.h"
 #include "client.h"
-#include <sys/socket.h>
 
 
 LandingPage::LandingPage(QWidget* parent): QWidget(parent){
@@ -31,12 +30,7 @@ LandingPage::LandingPage(QWidget* parent): QWidget(parent){
 void LandingPage::startStream(){
     VideoStreamServer* server = new VideoStreamServer;
     server->startServer();
-    // std::cout<<"Stream started" <<std::endl;
-    // int client_socket = accept(server->getServerSocket(), nullptr, nullptr);
-    // char buffer[1024] = {0};
-    // recv(client_socket, buffer, sizeof(buffer), 0);
-    // std::cout << "Message from client: " << buffer << std::endl;
-    // emit goToStreamingWindow();
+    emit goToStreamingWindow();
 };
 
 void LandingPage::joinStream(){

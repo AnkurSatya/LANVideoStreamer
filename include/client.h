@@ -4,7 +4,7 @@
 class VideoStreamClient : public QObject{
     Q_OBJECT
     public:
-        VideoStreamClient(QObject* parent = nullptr, const QString& hostAddress="127.0.0.1", quint16 port=8080);
+        VideoStreamClient(QObject* parent = nullptr, QString hostAddress="127.0.0.1", quint16 port=8080);
         ~VideoStreamClient();
         void connectToServer();
         void sendToServer();
@@ -13,6 +13,6 @@ class VideoStreamClient : public QObject{
 
     private:
         QTcpSocket* socket;
-        const QString& hostAddress;
+        QString hostAddress;
         quint16 port;
 };

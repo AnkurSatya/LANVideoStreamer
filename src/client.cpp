@@ -1,6 +1,6 @@
 #include "client.h"
 
-VideoStreamClient::VideoStreamClient(QObject* parent, const QString& hostAddress, quint16 port)
+VideoStreamClient::VideoStreamClient(QObject* parent, QString hostAddress, quint16 port)
     : QObject(parent) ,
     hostAddress{hostAddress},
     port{port}
