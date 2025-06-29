@@ -1,4 +1,7 @@
 #include "client.h"
+#include <QCoreApplication>
+#include <QImage>
+#include <opencv2/opencv.hpp>
 
 VideoStreamClient::VideoStreamClient(QObject* parent, QString hostAddress, quint16 port)
     : QObject(parent) ,
@@ -11,8 +14,7 @@ VideoStreamClient::VideoStreamClient(QObject* parent, QString hostAddress, quint
     // Connect socket signals to the slots
     connect(socket, &QTcpSocket::connected, this, &VideoStreamClient::onConnection);
     connect(socket, &QTcpSocket::disconnected, this, &VideoStreamClient::onDisconnection);
-
-
+    connect(socket, &QTcpSocket::errorOccurred, this, &VideoStreamClient::onError);
 };
 
 VideoStreamClient::~VideoStreamClient(){
@@ -25,14 +27,20 @@ void VideoStreamClient::connectToServer(){
 
 void VideoStreamClient::onConnection(){
     qDebug() << "Connected to server";
+    sendToServer();
 };
 
 void VideoStreamClient::onDisconnection(){
-    qDebug() << "Disconnect from the server";
+    qDebug() << "You are disconnected";
+};
+
+void VideoStreamClient::onError(QAbstractSocket::SocketError socketError){
+    qDebug() << "Connection error: "<< socket->errorString();
 };
 
 void VideoStreamClient::sendToServer(){
-    // const char* message = "Hello, server!";
-    // std::cout<<"Sending message now ..."<<std::endl;
-    // send(client_socket, message, strlen(message), 0);
+    QString image_path = QCoreApplication::applicationDirPath() + "/data/client_placeholder.jpeg";
+    cv::Mat img = cv::imread(image_path.toStdString(), cv::COLOR_BGR2RGB);
+    
+    // ToDo: Encode image, send the size and then the image bytes to the server over QTcpSocket.
 };

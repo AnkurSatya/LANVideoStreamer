@@ -32,11 +32,23 @@ void VideoStreamServer::onNewConnection(){
         clients.append(client_socket);
 
         connect(client_socket, &QTcpSocket::disconnected, this, &VideoStreamServer::onClientDisconnected);
-        qDebug() << "New client connected from " << client_socket->peerAddress().toString();
 
+        qDebug() << "New client connected from " << client_socket->peerAddress().toString();
         emit clientConnected(client_socket);
     }
 };
 
 void VideoStreamServer::onClientDisconnected(){
+    // Determine which client triggered this.
+    QTcpSocket* client_socket = qobject_cast<QTcpSocket*>(sender());
+
+    // Delete the socket.
+    if (client_socket){
+        qDebug() << "Client disconnected: "<< client_socket->peerAddress().toString();
+        client_socket->deleteLater();
+
+        // Delete the socket from the list of sockets.
+        clients.removeOne(client_socket);
+    }
+    //ToDo: Handle UI updates like removing the window for the user etc.
 };

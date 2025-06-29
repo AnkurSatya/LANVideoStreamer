@@ -10,6 +10,7 @@ class VideoStreamClient : public QObject{
         void sendToServer();
         void onConnection();
         void onDisconnection();
+        void onError(QAbstractSocket::SocketError socketError);
 
     private:
         QTcpSocket* socket;

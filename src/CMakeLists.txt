@@ -1,6 +1,10 @@
 # Collect all cpp files in src/
 file(GLOB SRC_FILES *.cpp)
 
+# Copying src/data to the build folder.
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data 
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 # Create the executable with all source files
 add_executable(
     ${PROJECT_NAME} 
